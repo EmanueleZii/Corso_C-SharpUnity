@@ -6,12 +6,13 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 movement;
 
     //INSTATIATE
-    [SerializeField] private GameObject cubePrefab; 
-    [SerializeField] private Vector3 spawnPosition = new Vector3(0, 1, 0);
-
+    [SerializeField] private GameObject cubePrefab;
+    [SerializeField] private Transform pos;
+    [SerializeField] private Vector3 spawnPosition;
 
     private void FixedUpdate()
     {
+        spawnPosition = new Vector3(pos.transform.position.x, pos.transform.position.y, pos.transform.position.z);
         movement = Vector3.zero;
 
         if (Input.GetKey(KeyCode.W)) movement += Vector3.forward;
