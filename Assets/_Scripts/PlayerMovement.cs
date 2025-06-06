@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private Rigidbody myrb;
     private bool isInGround = true;
-    private const float defaultTimerValue = 5f;
+    private const float defaultTimerValue = 0.0f;
     public float timergioco = defaultTimerValue;
     public TextMeshProUGUI textWin;
     public TextMeshProUGUI textTimer;
@@ -36,42 +36,32 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+
         // Se sta perdendo, gestisci il conto alla rovescia
-        bool flowControl = LoseMechanic();
-        if (!flowControl){
-            return;
-        }
-
-        Movement();
-        timergioco -= Time.deltaTime;
-        textTimer.text = "Tempo: " + timergioco.ToString("F2");
-        
-    }
-
-    private bool LoseMechanic()
-    {
         if (isLosing)
         {
+            Time.timeScale = 0;
             loseTimer -= Time.unscaledDeltaTime;
 
-            if (loseTimer <= 0f)
+            if (loseTimer < 0.0)
             {
                 // Reset stato gioco
                 transform.position = startPosition;
                 timergioco = defaultTimerValue;
                 loseTimer = 3f;
                 isLosing = false;
-                timergioco = 5f;
                 textWin.gameObject.SetActive(false);
                 Time.timeScale = 1f;
             }
 
-            return false; // Non eseguire il resto di Update mentre in pausa
+            return; // Non eseguire il resto di Update mentre in pausa
         }
+        Movement();
 
-        return true;
+        // Timer del gioco
+        timergioco += Time.deltaTime;
+        textTimer.text = "Tempo: " + timergioco.ToString("F2");
     }
-
     private void Movement()
     {
         moveDirection = Vector3.zero;
@@ -95,7 +85,6 @@ public class PlayerMovement : MonoBehaviour
         {
             // Attiva la perdita
             isLosing = true;
-            Time.timeScale = 0f;
             textWin.gameObject.SetActive(true);
             textWin.text = "You Lose";
         }
