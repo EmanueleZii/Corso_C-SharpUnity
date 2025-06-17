@@ -12,11 +12,9 @@ public class StudentsMenager : MonoBehaviour
     public Slider voto_medio;
     public TextMeshProUGUI studentPrefab; 
     public Transform ParentInstance;
-
     int votomin = 0;
     int votomax = 10;
     int currentvoto = 0;
-
     // Lista per tenere traccia degli oggetti studenti istanziati
     private List<GameObject> studentiIstanziati = new List<GameObject>();
     // Per sapere quale studente stai editando
@@ -33,6 +31,7 @@ public class StudentsMenager : MonoBehaviour
         List<string> classi = new List<string> { "Seleziona classe", "A1", "A2", "A3", "B1", "B2" };
         classi_dropDown.ClearOptions();
         classi_dropDown.AddOptions(classi);
+        //DontDestroyOnLoad(gameObject);
     }
 
     public void Aggiungi()
