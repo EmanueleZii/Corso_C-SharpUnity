@@ -4,8 +4,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
 
-public class StudentsMenager : MonoBehaviour
-{
+public class StudentsMenager : MonoBehaviour {
     public TMP_InputField nome, cognome, eta;
     public TMP_Dropdown classi_dropDown;
     public Button aggiungi;
@@ -19,7 +18,6 @@ public class StudentsMenager : MonoBehaviour
     private List<GameObject> studentiIstanziati = new List<GameObject>();
     // Per sapere quale studente stai editando
     private GameObject studenteSelezionato = null;
-
     void Start()
     {
         nome.text = "Inserisci Nome";
